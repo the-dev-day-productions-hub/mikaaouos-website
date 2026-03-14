@@ -34,8 +34,8 @@ export default function Home() {
               />
             </div>
             <div className='flex flex-col gap-0.5'>
-              <p className="text-white font-bold text-xl">Mikaaouo</p>
-              <div className="flex flex-row gap-0.5">
+              <p className="text-white font-bold text-2xl">Mikaaouo</p>
+              <div className="flex flex-row gap-0.5 text-xl">
                 <FaTwitch/>
                 <FaDiscord/>
                 <FaTiktok/>
