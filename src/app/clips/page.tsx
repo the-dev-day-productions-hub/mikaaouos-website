@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Image from 'next/image'
 import { FaClapperboard, FaRegShareFromSquare} from "react-icons/fa6";
 import { FcLike } from "react-icons/fc";
@@ -17,7 +18,7 @@ export default function Home() {
       />
       
       {/* frame for the entire scrren */}
-      <div className="w-full h-screen flex items-center justify-center p-4">
+      <div className="w-full h-screen flex flex-col items-center justify-center p-4">
 
         {/* centerpiece content */}
         <div className="relative w-100 h-150 p-4 flex flex-col items-center justify-center gap-2 bg-accent/80 rounded-xl shadow-xl">         
@@ -49,6 +50,11 @@ export default function Home() {
          
 
         </div>
+
+        {/* Home Button */}
+        <Link href="/" className='w-20 h-10 bg-accent rounded-b-lg flex items-center justify-center'>
+          Home
+        </Link>
 
       </div>
 
