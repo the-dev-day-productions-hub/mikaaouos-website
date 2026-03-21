@@ -25,7 +25,7 @@ export default function Home() {
         <div className="relative w-100 h-100 p-4 flex flex-col items-center justify-center gap-10 bg-accent/10 rounded-xl shadow-xl">
 
           {/* top bar add a border on profile pic */}
-          <div className="w-full h-16 flex items-center  gap-3 p-2 rounded-lg">
+          <div className="w-full h-16 flex items-center gap-2 p-2 rounded-lg">
             <div className="w-30 h-30 rounded-full overflow-hidden bg-white">
               <Image 
                 className="w-full h-full object-cover" 
@@ -35,13 +35,13 @@ export default function Home() {
               />
             </div>
             <div className='flex flex-col gap-0.5'>
-              <p className="text-white font-bold text-3xl">Mikaaouo</p>
-              <div className="flex flex-row gap-0.5 text-xl">
-                <FaTwitch/>
-                <FaDiscord/>
-                <FaTiktok/>
-                <FaTwitter/>
-                <TbTipJar/>
+              <p className="text-white font-bold text-4xl">Mikaaouo</p>
+              <div className="flex flex-row gap-2 text-2xl">
+                <Link href='https://www.twitch.tv/mikaaouo'><FaTwitch/></Link>
+                <Link href='https://discord.gg/2BdT9ZCWHe'><FaDiscord/></Link>
+                <Link href='https://www.tiktok.com/@mikaaouo'><FaTiktok/></Link>
+                <Link href='https://twitter.com/mikaaouo'><FaTwitter/></Link>
+                <Link href='https://streamelements.com/mikaaouo/tip'><TbTipJar/></Link>               
               </div>
             </div>
           </div>
@@ -54,23 +54,23 @@ export default function Home() {
 
             <div className='w-1/4 h-full flex items-center justify-start'>
 
-              <div className='w-40 h-10 flex flex-row items-center justify-center gap-1 bg-secondary rounded-2xl'>
+              <Link href="/clips" className='w-40 h-10 flex flex-row items-center justify-center gap-1 bg-secondary rounded-2xl'>
                 <FaClapperboard className='text-white text-xl'/>
-                <Link href="/clips" className='text-white font-bold text-xl'>Clips</Link>
-              </div> 
+                <p className='text-white font-bold text-xl'>Clips</p>
+              </Link> 
 
             </div>
 
            
 
-            <div className='w-3/4 h-full flex items-center justify-end gap-2 rounded-2xl'>
+            <Link href="/suggestions"  className='w-3/4 h-full flex items-center justify-end gap-2 rounded-2xl'>
 
               <div className='w-65 h-10 flex flex-row items-center justify-center bg-secondary rounded-2xl'>
-                <Link href="/suggestions" className='text-white font-bold text-xl'>Suggestions</Link>
+                <p className='text-white font-bold text-xl'>Suggestions</p>
                 <TbBubbleTea className='text-white tracking-tighter text-3xl'/>
               </div>
 
-            </div>
+            </Link>
 
           </div>
 

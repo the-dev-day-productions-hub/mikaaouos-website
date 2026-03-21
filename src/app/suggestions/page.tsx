@@ -32,7 +32,23 @@ export default function Home() {
 
           {/* suggestion box */}
           <div className='w-full h-120 bg-midbackground/60 flex items-center justify-center rounded-lg'>
-            <div className='w-full h-full p-3 flex items-center justify-center'>
+            <div className='w-full h-full p-3 flex flex-col items-center justify-center'>
+
+              <div className='w-full h-16 p-0.5 flex flex-row gap-1 bg-secondary rounded-2xl'>
+                <div className='w-15 h-15 bg-secondary rounded-full overflow-hidden'>
+                  <Image 
+                    className="w-full h-full object-cover" 
+                    src="/assets/images/profilePic.png"
+                    width={200} height={200} 
+                    alt=''
+                  />
+                </div>
+                <div className='w-3/4 h-16'>
+                  <p className='text-white font-bold'>John Doe</p>
+                  <p className='text-white text-xs'>omg you should def like go over there and do the things plus the subathons and akin to that</p>
+                </div>
+
+              </div>
               <div className='text-white font-bold text-xl'>Coming Soon</div>
             </div>
           </div>
