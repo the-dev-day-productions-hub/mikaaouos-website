@@ -8,7 +8,7 @@ import { FcLike } from "react-icons/fc";
 export default function Home() {
   return (
     <main>
-
+      
       {/* backdrop */}
       <Image 
         className="-z-10 absolute w-full h-screen object-cover" 
@@ -26,11 +26,12 @@ export default function Home() {
           {/* top bar */}
           <div className='w-full h-8 bg-midbackground/60 flex flex-row items-center justify-center gap-1 rounded-lg'>
               <TbBubbleTea className='text-white'/>
-              <p className='text-white font-bold'>Suggestions-Box</p>
+              <p className='text-white font-bold'>Guest-Book</p>
               <TbBubbleTea className='text-white'/>
           </div>
 
-          {/* suggestion box */}
+          {/* make a textarea along with date of comment */}
+          {/* Guest book */}
           <div className='w-full h-120 bg-midbackground/60 flex items-center justify-center rounded-lg'>
             <div className='w-full h-full p-3 flex flex-col items-center justify-center'>
 

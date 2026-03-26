@@ -9,6 +9,7 @@ import { GiDividedSquare } from "react-icons/gi";
 export default function Home() {
   return (
     <main>
+      <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 
       {/* backdrop */}
       <Image 
@@ -63,10 +64,10 @@ export default function Home() {
 
            
 
-            <Link href="/suggestions"  className='w-3/4 h-full flex items-center justify-end gap-2 rounded-2xl'>
+            <Link href="/guestbook"  className='w-3/4 h-full flex items-center justify-end gap-2 rounded-2xl'>
 
               <div className='w-65 h-10 flex flex-row items-center justify-center bg-secondary rounded-2xl'>
-                <p className='text-white font-bold text-xl'>Suggestions</p>
+                <p className='text-white font-bold text-xl'>Guestbook</p>
                 <TbBubbleTea className='text-white tracking-tighter text-3xl'/>
               </div>
 
@@ -77,7 +78,8 @@ export default function Home() {
           {/* spotify */}
           <div className='w-full h-16 bg-midbackground/60 flex items-center justify-center rounded-lg'>
             <div className='w-full h-full p-3 flex items-center justify-center'>
-              <div className='text-white font-bold text-xl'>Coming Soon</div>
+              <div id="embed-iframe"></div>
+              {/* <div className='text-white font-bold text-xl'>Coming Soon</div> */}
             </div>
           </div>
          
