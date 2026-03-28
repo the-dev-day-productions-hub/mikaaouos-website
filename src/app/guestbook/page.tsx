@@ -1,13 +1,26 @@
+"use client"
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState, ChangeEvent } from 'react';
+
 import { TbBubbleTea, TbSend  } from "react-icons/tb"
 import { FcLike } from "react-icons/fc";
 
-function GuestResponse({ name,response }) {
-  return(
+import { response } from "./response.js"
+
+interface GuestResponseProps {
+  author: string
+  message: string
+  // timestamp
+  // likes
+}
+
+function GuestResponse({ author, message }: GuestResponseProps) {
+
+  return (
     <div className='w-full h-16 p-0.5 flex flex-row gap-1 bg-secondary rounded-2xl'>
       <div className='w-15 h-15 bg-secondary rounded-full overflow-hidden'>
-        <Image 
+        <Image
           className="w-full h-full object-cover" 
           src="/assets/images/profilePic.png"
           width={200} height={200} 
@@ -15,17 +28,26 @@ function GuestResponse({ name,response }) {
         />
       </div>
       <div className='w-3/4 h-16'>
-        <p className='text-white font-bold'>{name}</p>
-        <p className='text-white text-xs'>{response}</p>
+        <p className='text-white font-bold'>{author}</p>
+        <p className='text-white text-xs'>{message}</p>
       </div>
 
     </div>
   );
-
 }
 
-export default function Home() {
+export default function Guestbook() {
+
+  const [message, setMessage] = useState('Leave your mark');
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const nextMessage = event.target.value
+    setMessage(nextMessage)
+    console.log(nextMessage)
+  }
+
   return (
+
     <main>
       
       {/* backdrop */}
@@ -54,35 +76,30 @@ export default function Home() {
           <div className='w-full h-120 bg-midbackground/60 flex items-center justify-center rounded-lg'>
             <div className='w-full h-full p-3 flex flex-col items-center gap-1 justify-center'>
 
-              <GuestResponse 
-              name="Snehasish Khan"
-              response="Amazing work on this website, keep it up!"/>
+              {/* guest list render */}
+              {response.map((guest) => {
+                return <GuestResponse key={guest.id} author={guest.author} message={guest.message}/>
+              })}
               
+
               <div className='text-white font-bold text-xl'>Coming Soon</div>
             </div>
           </div>
 
-          {/* Feedback comments */}
+          {/* feedback comments */}
           <div className='w-full h-8 p-2 flex items-center gap-1 bg-secondary/50 rounded-2xl'>
             <TbSend type="submit" className='text-white text-xl cursor-pointer'  />
-            <input type="text" placeholder='Leave your mark' className='w-full h-full bg-transparent outline-none'/>
+            <input value={message} onChange={handleChange} className='w-full h-full bg-transparent outline-none'/>
           </div>
-          
-
-
-         
 
         </div>
 
-        {/* Home Button */}
+        {/* home Button */}
         <Link href="/" className='w-20 h-10 bg-accent rounded-b-lg flex items-center justify-center'>
           Home
         </Link>
-
       </div>
 
-
     </main>
-
-  );
+  )
 }
