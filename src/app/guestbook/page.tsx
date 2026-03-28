@@ -4,7 +4,6 @@ import { TbBubbleTea, TbSend  } from "react-icons/tb"
 import { FcLike } from "react-icons/fc";
 
 
-
 export default function Home() {
   return (
     <main>
@@ -55,8 +54,9 @@ export default function Home() {
           </div>
 
           {/* Feedback comments */}
-          <div className='w-full h-8 p-2 flex items-center  bg-secondary/50 rounded-2xl'>
-            <TbSend />
+          <div className='w-full h-8 p-2 flex items-center gap-1 bg-secondary/50 rounded-2xl'>
+            <TbSend type="submit" className='text-white text-xl cursor-pointer'  />
+            <input type="text" placeholder='Leave your mark' className='w-full h-full bg-transparent outline-none'/>
           </div>
           
 
