@@ -3,6 +3,26 @@ import Image from 'next/image'
 import { TbBubbleTea, TbSend  } from "react-icons/tb"
 import { FcLike } from "react-icons/fc";
 
+function GuestResponse({ name,response }) {
+  return(
+    <div className='w-full h-16 p-0.5 flex flex-row gap-1 bg-secondary rounded-2xl'>
+      <div className='w-15 h-15 bg-secondary rounded-full overflow-hidden'>
+        <Image 
+          className="w-full h-full object-cover" 
+          src="/assets/images/profilePic.png"
+          width={200} height={200} 
+          alt=''
+        />
+      </div>
+      <div className='w-3/4 h-16'>
+        <p className='text-white font-bold'>{name}</p>
+        <p className='text-white text-xs'>{response}</p>
+      </div>
+
+    </div>
+  );
+
+}
 
 export default function Home() {
   return (
@@ -32,23 +52,12 @@ export default function Home() {
           {/* make a textarea along with date of comment */}
           {/* Guest book */}
           <div className='w-full h-120 bg-midbackground/60 flex items-center justify-center rounded-lg'>
-            <div className='w-full h-full p-3 flex flex-col items-center justify-center'>
+            <div className='w-full h-full p-3 flex flex-col items-center gap-1 justify-center'>
 
-              <div className='w-full h-16 p-0.5 flex flex-row gap-1 bg-secondary rounded-2xl'>
-                <div className='w-15 h-15 bg-secondary rounded-full overflow-hidden'>
-                  <Image 
-                    className="w-full h-full object-cover" 
-                    src="/assets/images/profilePic.png"
-                    width={200} height={200} 
-                    alt=''
-                  />
-                </div>
-                <div className='w-3/4 h-16'>
-                  <p className='text-white font-bold'>John Doe</p>
-                  <p className='text-white text-xs'>omg you should def like go over there and do the things plus the subathons and akin to that</p>
-                </div>
-
-              </div>
+              <GuestResponse 
+              name="Snehasish Khan"
+              response="Amazing work on this website, keep it up!"/>
+              
               <div className='text-white font-bold text-xl'>Coming Soon</div>
             </div>
           </div>
