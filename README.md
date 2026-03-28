@@ -23,7 +23,7 @@ The goal of this project is to extend this capacity by building a personal websi
 
 - If using an external, standalone command-line shell, use the `cd` command like so:
 
-`cd Documents\project.ClubWebsite-live"`
+`cd Documents\mikaaouos-website`
 
 - **Alternatively, if you use VSCode**: after opening the folder, you can open a built-in Terminal (via top-left bar); it will automatically navigate itself to the currently open directory. (see below)
 
