@@ -32,16 +32,19 @@ export default function Home() {
             <div className='relative w-full max-w-160 aspect-video p-3 flex items-center justify-center bg-black'>
 
               {/* Likes and Shares */}
-              {/* <div className='absolute w-full h-5 bottom-[-10] flex flex-row justify-between'>
-                <div className='w-10 h-5 flex flex-row items-center bg-secondary/40'>
+              <div className='absolute w-[calc(100%+20px)] h-5 bottom-[-10] flex flex-row justify-between'>
+
+                <button className='w-10 h-5 flex flex-row items-center bg-secondary/40 cursor-pointer'>
                   <FcLike className='w-5 h-5'/>
                   <p className='text-white text-xs'>1.2K</p>
-                </div>
-                <div className='w-10 h-5 flex flex-row items-center bg-secondary/40'>
+                </button>
+
+                <div className='w-10 h-5 flex flex-row items-center bg-secondary/40 cursor-pointer'>
                   <p className='text-white text-xs'>1.2K</p>
                   <FaRegShareFromSquare className='w-5 h-5'/>  
                 </div>
-              </div> */}
+
+              </div>
 
               <div className='w-full h-full flex items-center justify-center'>
                 <FaClapperboard className='text-white/20' size={100}/>
