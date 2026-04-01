@@ -12,5 +12,12 @@ export const response = [
         message: 'amazing website wowse, pogchamp, axolatole is better',
         timestamp: '',
         likes: 0,
+    },
+    {
+        id: 2,
+        author: 'JM',
+        message: 'IM HIM',
+        timestamp: '3/31/2025',
+        likes: 0,
     }
 ]
