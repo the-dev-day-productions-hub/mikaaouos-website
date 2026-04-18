@@ -3,8 +3,6 @@ import Link from 'next/link'
 import { FaTiktok, FaTwitch, FaTwitter, FaDiscord, FaClapperboard } from "react-icons/fa6";
 import { TbTipJar } from "react-icons/tb";
 import { TbBubbleTea } from "react-icons/tb"
-import { GiDividedSquare } from "react-icons/gi";
-
 
 export default function Home() {
   return (
@@ -48,7 +46,15 @@ export default function Home() {
           </div>
 
           {/* Disocf */}
-          <div className='w-full h-16 bg-[#5865F2]'>discord</div>
+          <div className='w-full h-16 bg-[#5865F2]'>
+            <iframe
+            title="Discord user embed"
+            width="340"
+            height="72"
+            sandbox="allow-scripts"
+            src="https://widgets.vendicated.dev/user?id=353192532751941632&theme=dark&banner=false&full-banner=false&rounded-corners=true&discord-icon=true&badges=true&guess-nitro=false&background-color=%23fff&foreground-color=%23000"
+            ></iframe>
+          </div>
 
           {/* bottom bar make the bigger div the link*/}
           <div className='relative w-full h-1 flex flex-row rounded-lg'>
@@ -76,9 +82,15 @@ export default function Home() {
           </div>
 
           {/* spotify */}
-          <div className='w-full h-16 bg-midbackground/60 flex items-center justify-center rounded-lg'>
+          <div className='w-full h-32 bg-midbackground/60 flex items-center justify-center rounded-lg'>
             <div className='w-full h-full p-3 flex items-center justify-center'>
-              <div id="embed-iframe"></div>
+              <iframe 
+              data-testid="embed-iframe"  
+              src="https://open.spotify.com/embed/artist/1rB0DVM76k24T3zhzJOCoJ?utm_source=generator" 
+              width="100%" height="100"  
+              allow="autoplay; clipboard-write; encrypted-media; 
+              fullscreen; picture-in-picture" 
+              loading="lazy" />
               {/* <div className='text-white font-bold text-xl'>Coming Soon</div> */}
             </div>
           </div>
