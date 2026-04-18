@@ -1,10 +1,10 @@
 "use client"
 import Link from 'next/link'
 import Image from 'next/image'
-import { use, useState } from 'react';
-import { FaClapperboard, FaRegShareFromSquare} from "react-icons/fa6";
-import { FcLike } from "react-icons/fc";
 
+import { use, useState } from 'react';
+import { FaClapperboard } from 'react-icons/fa6'
+import { FcLike } from 'react-icons/fc'
 export default function Home() {
   const [countLike, setCountLike] = useState(0)
   const [countShare, setCountShare] = useState(0)
@@ -21,17 +21,17 @@ export default function Home() {
 
       {/* backdrop */}
       <Image 
-        className="-z-10 absolute w-full h-screen object-cover" 
-        src="/assets/images/skybackdrop.jpg" 
+        className="-z-10 absolute w-full h-screen object-cover"
+        src="/assets/images/skybackdrop.jpg"
         width={2000} height={2000}
-        alt="" 
+        alt=""
       />
       
       {/* frame for the entire scrren */}
       <div className="w-full h-screen flex flex-col items-center justify-center p-4">
 
         {/* centerpiece content */}
-        <div className="relative w-full max-w-200 h-250 p-4 flex flex-col items-center justify-center gap-2 bg-accent/80 rounded-xl shadow-xl">         
+        <div className="relative w-full max-w-200 h-250 p-4 flex flex-col items-center justify-center gap-2 bg-accent/80 rounded-xl shadow-xl">
 
           {/* Clips Gallery */}
           <div className='w-full h-110 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
@@ -64,7 +64,6 @@ export default function Home() {
 
 
           </div>
-         
         </div>
 
         {/* Home Button */}
