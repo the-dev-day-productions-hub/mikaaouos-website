@@ -1,11 +1,21 @@
+"use client"
 import Link from 'next/link'
 import Image from 'next/image'
+import { use, useState } from 'react';
 import { FaClapperboard, FaRegShareFromSquare} from "react-icons/fa6";
 import { FcLike } from "react-icons/fc";
 
-// add a home button somehere
-
 export default function Home() {
+  const [countLike, setCountLike] = useState(0)
+  const [countShare, setCountShare] = useState(0)
+
+  function handleLikeClick(){
+    setCountLike(countLike + 1) 
+  }
+  function handleShareClick(){
+    setCountShare(countShare + 1)
+  }
+
   return (
     <main>
 
@@ -26,27 +36,30 @@ export default function Home() {
           {/* Clips Gallery */}
           <div className='w-full h-110 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
 
-            <p className='text-white font-bold text-xl'>Clips Gallery</p>
+            <p className='text-white font-bold text-xl'>Clips Gallery (in developement)</p>
 
             {/* video placeholder */}
-            <div className='relative w-full max-w-160 aspect-video p-3 flex items-center justify-center bg-black'>
+            <div className='relative w-full max-w-160 aspect-video flex items-center justify-center bg-black'>
 
               {/* Likes and Shares */}
-              {/* <div className='absolute w-full h-5 bottom-[-10] flex flex-row justify-between'>
-                <div className='w-10 h-5 flex flex-row items-center bg-secondary/40'>
+              <div className='absolute w-[calc(100%+20px)] h-5 bottom-[-10] flex flex-row justify-between'>
+
+                <button onClick={handleLikeClick} className='w-10 h-5 flex flex-row items-center bg-secondary/40 cursor-pointer'>
                   <FcLike className='w-5 h-5'/>
-                  <p className='text-white text-xs'>1.2K</p>
-                </div>
-                <div className='w-10 h-5 flex flex-row items-center bg-secondary/40'>
-                  <p className='text-white text-xs'>1.2K</p>
+                  <p className='text-white text-xs'>{countLike}</p>
+                </button>
+
+                <div onClick={handleShareClick} className='w-10 h-5 flex flex-row items-center bg-secondary/40 cursor-pointer'>
+                  <p className='text-white text-xs'>{countShare}</p>
                   <FaRegShareFromSquare className='w-5 h-5'/>  
                 </div>
-              </div> */}
 
-              <div className='w-full h-full flex items-center justify-center'>
-                <FaClapperboard className='text-white/20' size={100}/>
               </div>
-              <p className='text-white font-bold text-xl'>Coming Soon Clips</p>
+
+              {/* Just a youtube video as placeholder should be use twitch if we can */}
+              <iframe className='w-full h-full' src="https://www.youtube.com/embed/mfBoy9PyqR8?si=xChEve-p_SnsC7Wy" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+             
+           
             </div>
 
 
