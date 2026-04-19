@@ -1,19 +1,35 @@
 import 'dotenv/config' 
-import { Client, GatewayIntentBits, Events} from "discord.js" 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-client.login(process.env.DISCORD_TOKEN);
 
-client.once(Events.ClientReady, (readyClient) => {
-	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-});
 
 
 export async function GET() {
-    const user = await client.users.fetch('353192532751941632')
+    
+    
+    const response = await fetch('https://discord.com/api/users/353192532751941632', {
+        headers: {
+            authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        },
+    })
+
+    if (!response.ok){
+        return Response.json(
+            { message: 'Failed to fetch user data' }, 
+            { status: 500 }
+        )
+    }
+
+    // https://cdn.discordapp.com/
+    //  avatars/user_id/user_avatar.png *
+    // 	avatar-decoration-presets/avatar_decoration_data_asset.png
+
+    const user = await response.json()
+
+
     return Response.json({ 
     message: 'Hello World',
-    avatarDecoration : user.avatarDecorationURL(),
-    avatarImage : user.displayAvatarURL()
+    username : user.username,
+    avatarImage : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`,
+    avatarDecoration : `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.webp`
 })
 
 }
