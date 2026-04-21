@@ -3,24 +3,38 @@
 
 **[mikaaouo](https://www.twitch.tv/mikaaouo)** is a professional, ever-evolving streamer on the popular Twitch streaming platform.
 
-One of the cornerstones in nurturing a successful online career is by developing a strong, professional, and personable online presence. 
+We believe a key cornerstone in nurturing a successful online career is by nurturing a strong, professional, and personable online presence. 
 
-The goal of this project is to extend this capacity by building a personal website for our client, which at this current point in time aims to be a visually-striking and light-weight socials hub.
+The object of this project is to initialize a platform that can realize this capability for the professional usage and purposes of our client.
 
-[Contributor To-do Notion Page](https://www.notion.so/Micah-s-Website-mikaaouo-30e807b2ff3f80be81a3fa4d0a9ce0f2) (requires special access)
+🧀🐁
+
+---
+
+At this time, this project's current scope includes:
+* 🎯 establishing a light personal hub, serving as a [living](https://en.wikipedia.org/wiki/Living_document) personal website
+  * directory to online socials
+  * personable integrations with [Spotify](https://developer.spotify.com/documentation/web-api) and [Twitch](https://dev.twitch.tv/docs/api/)
+  * spark interest via interactivty and personable, visual charm for visitors 
+* 🧩 designing a modular front-end and back-end for ease of development and extensibiltiy
+* 🗝️ practical, streamlined process of configuration for behalf of our client
+
+At this time, this project will be a single-page application (SPA) developed using these technologies:
+* [Next.js](https://nextjs.org), [Tailwind CSS](https://v3.tailwindcss.com), [Framer Motion](https://motion.dev): Our front-end technologies.
+* Hosted, and protected, using the [Cloudflare platform](https://www.cloudflare.com).
 
 > [!IMPORTANT]  
-> This project is an active #DevDay product.
+> This project is labeled as an active `#devday` product. 
+>
+> *"Please mind the mess!"* — and expect continuous integration, recurring deployments, and existential instability.
 
 ### 📊 Repository Contribution Activity
 
-![Alt](https://repobeats.axiom.co/api/embed/6bbf44d228fca7a0d44cf04bbf590005ecc8fc2c.svg "Repobeats analytics image"))
-
-> CURRENTLY PLACEHOLDER; TO BE CHANGED FOR PUBLIC RELEASE
+![Alt](https://repobeats.axiom.co/api/embed/6bbf44d228fca7a0d44cf04bbf590005ecc8fc2c.svg "Repobeats analytics image")
 
 ## 🔰 Quick Setup / Getting Started
 
-> Want to help design and add stuff to our project? Setup is easy and should take only ~5 minutes!
+> authored by @devalto
 
 1. Clone this project's repository locally to your computer using [Git](https://git-scm.com/downloads).
 
@@ -34,11 +48,11 @@ git --version
 
 <hr>
 
-2. Open the cloned project folder in an IDE of your choice. Then via your terminal, `cd` into the directory of said folder.
+2. Open the cloned project folder in an IDE of your choice. Then, via your terminal, `cd` into the directory of said folder.
 
 - If using an external, standalone command-line shell, use the `cd` command like so:
 ```bash
-# example if you keep your projects under your Documents folder
+# example: if you keep your projects under your Documents folder
 cd "C:\Users\<user_name>\Documents\<directory_to_wherever_your_projects_are>\mikaaouos-website"
 ```
 - **Alternatively, if you use VSCode**: after opening the folder, you can open a built-in Terminal (via top-left bar); it will automatically navigate the terminal to the currently open directory. (see below)
@@ -57,7 +71,7 @@ node --version
 
 <hr>
 
-5. After installing Node.js, `npm`, its default package manager, also gets installed. This project however, instead uses Yarn. In the terminal pointing to your project directory, run the following command to install Yarn globally:
+5. When installing Node.js, `npm`, its default package manager, will also be installed. This project however, instead uses Yarn. In the terminal pointing to your project directory, run the following command to install Yarn globally:
 ```bash
 npm install --global yarn
 ```
@@ -108,7 +122,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ## ⚙️ Important Technical Details
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## 🔺 Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
