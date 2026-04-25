@@ -1,6 +1,3 @@
-import 'dotenv/config' 
-
-
 
 export async function GET() {
     
@@ -19,15 +16,19 @@ export async function GET() {
     }
 
     // https://cdn.discordapp.com/
+    // guild-tag-badges/guild_id/badge_hash.png
     //  avatars/user_id/user_avatar.png *
     // 	avatar-decoration-presets/avatar_decoration_data_asset.png
 
     const user = await response.json()
 
 
+
     return Response.json({ 
     message: 'Hello World',
-    username : user.username,
+    username : user.global_name || user.username,
+    clanTag : user.primary_guild.tag,
+    clanImage : `https://cdn.discordapp.com/guild-tag-badges/${user.primary_guild.identity_guild_id}/${user.primary_guild.badge}`,
     avatarImage : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`,
     avatarDecoration : `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.webp`
 })
