@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client"
 import Link from 'next/link'
 import Image from 'next/image'
@@ -16,6 +17,16 @@ export default function Home() {
     setCountShare(countShare + 1)
   }
 
+=======
+import Link from 'next/link'
+import Image from 'next/image'
+
+import { FaClapperboard } from 'react-icons/fa6'
+import { FcLike } from 'react-icons/fc'
+
+// add a home button somehere
+export default function Home() {
+>>>>>>> 2dbf9cef71ab96e4a8cf2eb64d2c220f83177f92
   return (
     <main>
 
@@ -36,6 +47,7 @@ export default function Home() {
           {/* Clips Gallery */}
           <div className='w-full h-110 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
 
+<<<<<<< HEAD
             <p className='text-white font-bold text-xl'>Clips Gallery (in developement)</p>
 
             {/* video placeholder */}
@@ -60,6 +72,29 @@ export default function Home() {
               <iframe className='w-full h-full' src="https://www.youtube.com/embed/mfBoy9PyqR8?si=xChEve-p_SnsC7Wy" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
              
            
+=======
+            <p className='text-white font-bold text-xl'>Clips Gallery</p>
+
+            {/* video placeholder */}
+            <div className='relative w-full max-w-160 aspect-video p-3 flex items-center justify-center bg-black'>
+
+              {/* Likes and Shares */}
+              {/* <div className='absolute w-full h-5 bottom-[-10] flex flex-row justify-between'>
+                <div className='w-10 h-5 flex flex-row items-center bg-secondary/40'>
+                  <FcLike className='w-5 h-5'/>
+                  <p className='text-white text-xs'>1.2K</p>
+                </div>
+                <div className='w-10 h-5 flex flex-row items-center bg-secondary/40'>
+                  <p className='text-white text-xs'>1.2K</p>
+                  <FaRegShareFromSquare className='w-5 h-5'/>  
+                </div>
+              </div> */}
+
+              <div className='w-full h-full flex items-center justify-center'>
+                <FaClapperboard className='text-white/20' size={100}/>
+              </div>
+              <p className='text-white font-bold text-xl'>Coming Soon Clips</p>
+>>>>>>> 2dbf9cef71ab96e4a8cf2eb64d2c220f83177f92
             </div>
 
 
