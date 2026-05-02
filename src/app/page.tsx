@@ -58,7 +58,7 @@ export default async function Home() {
           </div>
 
           {/* Disocf */}
-          <div className='w-full h-16 flex items-center p-3 bg-[#5865F2]'>
+          <div className='w-full h-16 p-3 flex items-center gap-3 rounded-2xl bg-white/10'>
             {/* <iframe
             title="Discord user embed"
             width="340"
@@ -68,7 +68,14 @@ export default async function Home() {
             ></iframe> */}
 
             {/* Profile Pic */}
-            <div className='className="h-full rounded-full aspect-square overflow-hidden bg-white"'>
+            <div className='relative className="h-full rounded-full aspect-square bg-white"'>
+              <Image
+                className='absolute'
+                src={discordData.avatarDecoration}
+                width={50} height={50}
+                alt='Decoration'
+                unoptimized
+              />
               <Image
                 className='rounded-full'
                 src={discordData.avatarImage}
@@ -76,22 +83,23 @@ export default async function Home() {
                 alt="Profile Pic"
                 unoptimized
               />
+
             </div>
 
             {/* Username and Status */}
-            <div className='h-full flex flex-col'>
-              <div className='h-1/2 flex flex-row justify-center items-center'>
+            <div className='h-full flex flex-col '>
+              <div className='h-1/2 flex flex-row justify-center items-center gap-1'>
                 <p className="text-white font-bold text-xl">{discordData.username}</p>
                 
                 {/* Clan Tag */}
-                <div className='h-full'>
+                <div className='h-full flex flex-row justify-center items-center gap-1 p-2 rounded-2xl bg-accent/30'>
                   <Image
-                    className='rounded-full'
-                    src={discordData.clanTag}
-                    width={10} height={50}
+                    src={discordData.clanImage}
+                    width={10} height={10}
                     alt='DiscordImageTag'
                     unoptimized
                   />
+                  <p className="text-white text-xs font-bold">{discordData.clanTag}</p>
                   
                 </div>
 
