@@ -29,8 +29,9 @@ export async function GET() {
     username : user.global_name || user.username,
     clanTag : user.primary_guild.tag,
     clanImage : `https://cdn.discordapp.com/guild-tag-badges/${user.primary_guild.identity_guild_id}/${user.primary_guild.badge}`,
-    avatarImage : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`,
-    avatarDecoration : `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.webp`
+    avatarImage : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`,
+    avatarDecoration : `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png`,
+    nameTagDecoration : `https://cdn.discordapp.com/assets/collectibles/${user.collectibles.nameplate.asset}static.png`
 })
 
 }

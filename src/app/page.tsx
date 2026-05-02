@@ -58,7 +58,7 @@ export default async function Home() {
           </div>
 
           {/* Disocf */}
-          <div className='w-full h-16 p-3 flex items-center gap-3 rounded-2xl bg-white/10'>
+          <div className='relative w-full h-16 p-1 flex items-center gap-3 rounded-2xl bg-white/10'>
             {/* <iframe
             title="Discord user embed"
             width="340"
@@ -72,7 +72,7 @@ export default async function Home() {
               <Image
                 className='absolute'
                 src={discordData.avatarDecoration}
-                width={50} height={50}
+                width={100} height={100}
                 alt='Decoration'
                 unoptimized
               />
@@ -80,6 +80,7 @@ export default async function Home() {
                 className='rounded-full'
                 src={discordData.avatarImage}
                 width={50} height={50}
+                quality={127}
                 alt="Profile Pic"
                 unoptimized
               />
@@ -112,7 +113,14 @@ export default async function Home() {
             
             </div>
             
-            
+            {/* Nameplate Deco */}
+            <Image
+              className='absolute h-full w-full'
+              src={discordData.nameTagDecoration}
+              width={672} height={126}
+              alt='Nameplate Deco'
+              unoptimized
+            />
             
           </div>
 
