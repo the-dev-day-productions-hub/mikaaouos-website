@@ -4,7 +4,19 @@ import { FaTiktok, FaTwitch, FaTwitter, FaDiscord, FaClapperboard } from "react-
 import { TbTipJar } from "react-icons/tb";
 import { TbBubbleTea } from "react-icons/tb"
 
-export default function Home() {
+
+export default async function Home() {
+  console.log(`${process.env.APP_URL}/api`)
+  const discordResponse = await fetch(`${process.env.APP_URL}/api`)
+  
+  if (!discordResponse.ok) {
+    return <div>
+      Failed to fetch data from {process.env.APP_URL}/api
+    </div>
+  }
+
+  const discordData = await discordResponse.json() 
+
   return (
     <main>
       <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
@@ -46,14 +58,70 @@ export default function Home() {
           </div>
 
           {/* Disocf */}
-          <div className='w-full h-16 bg-[#5865F2]'>
-            <iframe
+          <div className='relative w-full h-16 p-1 flex items-center gap-3 rounded-2xl bg-white/10'>
+            {/* <iframe
             title="Discord user embed"
             width="340"
             height="72"
             sandbox="allow-scripts"
             src="https://widgets.vendicated.dev/user?id=353192532751941632&theme=dark&banner=false&full-banner=false&rounded-corners=true&discord-icon=true&badges=true&guess-nitro=false&background-color=%23fff&foreground-color=%23000"
-            ></iframe>
+            ></iframe> */}
+
+            {/* Profile Pic */}
+            <div className='relative className="h-full rounded-full aspect-square bg-white"'>
+              <Image
+                className='absolute'
+                src={discordData.avatarDecoration}
+                width={100} height={100}
+                alt='Decoration'
+                unoptimized
+              />
+              <Image
+                className='rounded-full'
+                src={discordData.avatarImage}
+                width={50} height={50}
+                quality={127}
+                alt="Profile Pic"
+                unoptimized
+              />
+
+            </div>
+
+            {/* Username and Status */}
+            <div className='h-full flex flex-col '>
+              <div className='h-1/2 flex flex-row justify-center items-center gap-1'>
+                <p className="text-white font-bold text-xl">{discordData.username}</p>
+                
+                {/* Clan Tag */}
+                <div className='h-full flex flex-row justify-center items-center gap-1 p-2 rounded-2xl bg-accent/30'>
+                  <Image
+                    src={discordData.clanImage}
+                    width={10} height={10}
+                    alt='DiscordImageTag'
+                    unoptimized
+                  />
+                  <p className="text-white text-xs font-bold">{discordData.clanTag}</p>
+                  
+                </div>
+
+              </div>
+
+              {/* Status */}
+              <div className='h-1/2'>
+                <p className="text-white text-base">{"Online (Placeholder)"}</p>
+              </div> 
+            
+            </div>
+            
+            {/* Nameplate Deco */}
+            <Image
+              className='absolute h-full w-full'
+              src={discordData.nameTagDecoration}
+              width={672} height={126}
+              alt='Nameplate Deco'
+              unoptimized
+            />
+            
           </div>
 
           {/* bottom bar make the bigger div the link*/}
