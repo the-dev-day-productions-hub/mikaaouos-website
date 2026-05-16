@@ -7,11 +7,11 @@ import { TbBubbleTea } from "react-icons/tb"
 
 export default async function Home() {
   console.log(`${process.env.APP_URL}/api`)
-  const discordResponse = await fetch(`${process.env.APP_URL}/api`)
+  const discordResponse = await fetch(`${process.env.APP_URL}/api/discord`)
   
   if (!discordResponse.ok) {
     return <div>
-      Failed to fetch data from {process.env.APP_URL}/api
+      Failed to fetch data from {process.env.APP_URL}/api/discord
     </div>
   }
 
