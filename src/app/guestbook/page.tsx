@@ -1,21 +1,21 @@
 "use client"
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, ChangeEvent } from 'react'
+import { useState, useEffect, ChangeEvent, use } from 'react'
 
 import { TbBubbleTea, TbSend  } from "react-icons/tb"
 import { FcLike } from "react-icons/fc"
 
-import { response } from "./response.js"
+const GUESTBOOK_ENDPOINT = `${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`
 
-interface GuestResponseProps {
-  author: string
-  message: string
-  timestamp: string
+interface GuestbookEntryProps {
+  author_name: string
+  content: string
+  created_at: string
   likes: number
 }
 
-function GuestResponse({ author, message, timestamp, likes }: GuestResponseProps) {
+function GuestbookEntry({ author_name, content, created_at, likes }: GuestbookEntryProps) {
 
   return (
     <div className='w-full h-16 p-0.5 flex flex-row gap-1 bg-secondary rounded-2xl'>
@@ -32,8 +32,8 @@ function GuestResponse({ author, message, timestamp, likes }: GuestResponseProps
       <div className='w-3/4 h-16'>
         <div className='w-full h-1/3 flex flex-row justify-between'>
           <div className='flex flex-row items-center gap-1'>
-            <p className='text-accent font-bold'>{author}</p>
-            <p className='text-textcol font-extralight text-xs'>{timestamp}</p>
+            <p className='text-accent font-bold'>{author_name}</p>
+            <p className='text-textcol font-extralight text-xs'>{created_at}</p>
           </div>
           
           <div className='flex flex-row gap-1'>
@@ -43,7 +43,7 @@ function GuestResponse({ author, message, timestamp, likes }: GuestResponseProps
           
         </div>
         
-        <p className='text-textcol text-xs'>{message}</p>
+        <p className='text-textcol text-xs'>{content}</p>
       </div>
     </div>
   )
@@ -51,29 +51,42 @@ function GuestResponse({ author, message, timestamp, likes }: GuestResponseProps
 
 export default function Guestbook() {
 
-  // was supposed to be a temp database but you cant't edit the js since this like a new copy of it. 
-  const [responseList, setResponseList] = useState(response) 
-  const [message, setMessage] = useState('Leave your mark');
+  const [guestbookList, setGuestbookList] = useState([])
+  useEffect(() => {
+  async function fetchBackend(){
+    console.log("john doe")
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`)
+  
+    if (!response.ok) return setGuestbookList([])
 
-  // Needs database to work idk 
+    return setGuestbookList(await response.json())
+  }
+
+  fetchBackend()
+  }, [])
+
+  console.log(guestbookList)
+  const [inputContent, setInputContent] = useState('Leave your mark');
+
+  // Create funtion
   function addResponse() {
     const newResponse = {
-      id: responseList.length + 1,
-      author: "JM",
-      message: message,
-      timestamp: '',
+      id: guestbookList.length + 1,
+      author_name: "JM",
+      content: inputContent,
+      created_at: '',
       likes: 0
     }
 
-    setResponseList([ ...responseList, newResponse ])
+    setGuestbookList([ ...guestbookList, newResponse ])
     console.log(newResponse)
   }
 
   
-  
+  // Connect this to the insert thing
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const nextMessage = event.target.value
-    setMessage(nextMessage)
+    setInputContent(nextMessage)
     console.log(nextMessage)
   }
 
@@ -108,9 +121,9 @@ export default function Guestbook() {
             <div className='w-full h-full p-3 flex flex-col items-center gap-1 justify-center'>
 
               {/* guest list render, resoponselist but its temp */}
-              {responseList.map((guest) => {
-                return <GuestResponse key={guest.id} author={guest.author} message={guest.message} timestamp={guest.timestamp} likes={guest.likes} />
-              })}              
+              {guestbookList.map((entry) => {
+                return <GuestbookEntry key={entry.id} author_name={entry.author_name} content={entry.content} created_at={entry.timestamp} likes={entry.likes} />
+              })}
 
               <div className='text-white font-bold text-xl'>Coming Soon</div>
             </div>
@@ -119,7 +132,7 @@ export default function Guestbook() {
           {/* feedback comments */}
           <div className='w-full h-8 p-2 flex items-center gap-1 bg-secondary/50 rounded-2xl'>
             <button onClick={addResponse}><TbSend className='text-white text-xl'/></button>
-            <input value={message} onChange={handleChange} className='w-full h-full bg-transparent outline-none'/>
+            <input value={inputContent} onChange={handleChange} className='w-full h-full bg-transparent outline-none'/>
           </div>
 
         </div>

@@ -7,14 +7,23 @@ const supabaseclient = createClient(
 
 export async function GET() {
     const {data, error} = await supabaseclient
-        .from('test_table')
+        .from('guestbook')
         .select()
-    
+        .order('created_at', {ascending: false} )
+        .range(0,5) //temp range
+
+
     console.log("defalt")    
     console.log(data)
 
-    return Response.json({
-        message: "helloworld",
-    })
+    if(error){
+        return Response.json(
+            error
+        )
+    }
+
+    return Response.json(
+        data
+    )
 
 }
