@@ -50,7 +50,7 @@ function GuestbookEntry({ author_name, content, created_at, likes }: GuestbookEn
 }
 
 export default function Guestbook() {
-
+ 
   const [guestbookList, setGuestbookList] = useState([])
   useEffect(() => {
   async function fetchBackend(){
@@ -69,7 +69,7 @@ export default function Guestbook() {
   const [inputContent, setInputContent] = useState('Leave your mark');
 
   // Create funtion
-  function addResponse() {
+  async function addResponse() {
     const newResponse = {
       id: guestbookList.length + 1,
       author_name: "JM",
@@ -78,8 +78,18 @@ export default function Guestbook() {
       likes: 0
     }
 
-    setGuestbookList([ ...guestbookList, newResponse ])
-    console.log(newResponse)
+
+    // setGuestbookList([ ...guestbookList, newResponse ])
+    const guestbookAdd = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`, {
+      method: "POST",
+      body: JSON.stringify(newResponse)
+    })
+  
+    if (!guestbookAdd.ok) {
+    return <div>
+      Failed to fetch data from {process.env.NEXT_PUBLIC_APP_URL}/api/guestbook
+    </div>
+    }
   }
 
   

@@ -27,3 +27,11 @@ export async function GET() {
     )
 
 }
+
+
+// TODO: client can show the user an error message like "Try again later" for when insert isn't sucessful
+export async function POST(request: Request) {
+  const res = await request.json()
+  console.log(res)
+  return Response.json({ res })
+}
