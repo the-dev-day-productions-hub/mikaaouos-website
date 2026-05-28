@@ -8,7 +8,10 @@ const supabaseclient = createClient(
     process.env.SUPABASE_SECRET as string,
 )
 
-export async function GET() {
+export async function GET(request: Request) {
+    //trying to get startguest and endguest from the frontend to put in range
+    //const res = await request.json() 
+
     const {data, error} = await supabaseclient
         .from(TABLE_NAME)
         .select()

@@ -1,7 +1,7 @@
 "use client"
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect, ChangeEvent, use } from 'react'
+import { useState, useEffect, ChangeEvent} from 'react'
 
 import { TbBubbleTea, TbSend  } from "react-icons/tb"
 import { FcLike } from "react-icons/fc"
@@ -52,24 +52,32 @@ function GuestbookEntry({ author_name, content, created_at, likes }: GuestbookEn
 
 export default function Guestbook() {
  
+  // TODO: Used this to render which guest should appear on the page
+  // Limit the Range of Guest Appearing on the UI
+  let lastguest_front = 5
+  let firstguest_front = lastguest_front - 5
+  // Const to store Guest Input and Status Text
+  const [inputContent, setInputContent] = useState('Leave your mark');
+  const [statusText, setStatusText] = useState('')
   // Querying API for Data
   const [guestbookList, setGuestbookList] = useState([])
   
   useEffect(() => {
     async function fetchBackend() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`, {
+        method: "GET",
+      })
     
-      if (!response.ok) return setGuestbookList([])
-
+      if (!response.ok){
+        setStatusText("Can't get connected to database")
+        return setGuestbookList([])
+      } 
+      
       return setGuestbookList(await response.json())
     }
     
     fetchBackend()
   }, [])
-
-  //
-  const [inputContent, setInputContent] = useState('Leave your mark');
-  const [statusText, setStatusText] = useState('')
 
   // Create funtion to add to the supabase
   async function addResponse() {
