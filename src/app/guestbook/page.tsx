@@ -7,6 +7,7 @@ import { TbBubbleTea, TbSend  } from "react-icons/tb"
 import { FcLike } from "react-icons/fc"
 
 const GUESTBOOK_ENDPOINT = `${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`
+const MAX_CONTENT_LENGTH = 50
 
 interface GuestbookEntryProps {
   author_name: string
@@ -51,45 +52,47 @@ function GuestbookEntry({ author_name, content, created_at, likes }: GuestbookEn
 
 export default function Guestbook() {
  
+  // Querying API for Data
   const [guestbookList, setGuestbookList] = useState([])
-  useEffect(() => {
-  async function fetchBackend(){
-    console.log("john doe")
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`)
   
-    if (!response.ok) return setGuestbookList([])
+  useEffect(() => {
+    async function fetchBackend() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`)
+    
+      if (!response.ok) return setGuestbookList([])
 
-    return setGuestbookList(await response.json())
-  }
-
-  fetchBackend()
+      return setGuestbookList(await response.json())
+    }
+    
+    fetchBackend()
   }, [])
 
-  console.log(guestbookList)
+  //
   const [inputContent, setInputContent] = useState('Leave your mark');
+  const [statusText, setStatusText] = useState('')
 
-  // Create funtion
+  // Create funtion to add to the supabase
   async function addResponse() {
+
     const newResponse = {
-      id: guestbookList.length + 1,
       author_name: "JM",
-      content: inputContent,
-      created_at: '',
-      likes: 0
+      content: inputContent
     }
 
-
-    // setGuestbookList([ ...guestbookList, newResponse ])
+    if(newResponse.content.length == 0){
+      setStatusText("No Content")
+      return
+    }
+    if(newResponse.content.length > MAX_CONTENT_LENGTH){
+      setStatusText(`Content Too Long (Max is ${MAX_CONTENT_LENGTH})`)
+      return
+    }
+    
     const guestbookAdd = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`, {
       method: "POST",
       body: JSON.stringify(newResponse)
     })
-  
-    if (!guestbookAdd.ok) {
-    return <div>
-      Failed to fetch data from {process.env.NEXT_PUBLIC_APP_URL}/api/guestbook
-    </div>
-    }
+    setStatusText(guestbookAdd.statusText)
   }
 
   
@@ -97,7 +100,6 @@ export default function Guestbook() {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const nextMessage = event.target.value
     setInputContent(nextMessage)
-    console.log(nextMessage)
   }
 
   return (
@@ -141,8 +143,13 @@ export default function Guestbook() {
 
           {/* feedback comments */}
           <div className='w-full h-8 p-2 flex items-center gap-1 bg-secondary/50 rounded-2xl'>
-            <button onClick={addResponse}><TbSend className='text-white text-xl'/></button>
+            <button onClick={addResponse}><TbSend className='text-white text-xl cursor-pointer'/></button>
             <input value={inputContent} onChange={handleChange} className='w-full h-full bg-transparent outline-none'/>
+          </div>
+
+          {/* TODO: Make it so it disaper with click */}
+          <div className='flex items-center justify-center gap- rounded-xl'>
+              <p className='text-textcol font-extrabold'>{statusText}</p>
           </div>
 
         </div>
