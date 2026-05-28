@@ -64,7 +64,7 @@ export default function Guestbook() {
   
   useEffect(() => {
     async function fetchBackend() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`, {
+      const response = await fetch(GUESTBOOK_ENDPOINT, {
         method: "GET",
       })
     
@@ -96,7 +96,7 @@ export default function Guestbook() {
       return
     }
     
-    const guestbookAdd = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/guestbook`, {
+    const guestbookAdd = await fetch(GUESTBOOK_ENDPOINT, {
       method: "POST",
       body: JSON.stringify(newResponse)
     })
