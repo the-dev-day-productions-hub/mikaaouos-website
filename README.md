@@ -10,7 +10,6 @@ The object of this project is to deploy a platform that can realize this capabil
 🧀🐁
 
 ---
-
 At this time, this project's current scope includes:
 * 🎯 establishing a light personal hub, serving as a [living](https://en.wikipedia.org/wiki/Living_document) personal website
   * directory to online socials
@@ -28,10 +27,12 @@ At this time, this project will be a single-page application (SPA) developed usi
 >
 > *"Please mind the mess!"* — and expect continuous integration, recurring deployments, and existential instability.
 
+---
 ### 📊 Repository Contribution Activity
 
-![Alt](https://repobeats.axiom.co/api/embed/6bbf44d228fca7a0d44cf04bbf590005ecc8fc2c.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/16efabcbf6d1a2d5f415c01c7f9e24ada026d2b7.svg "Repobeats analytics image")
 
+---
 ## 🔰 Quick Setup / Getting Started
 
 > authored by @devalto
