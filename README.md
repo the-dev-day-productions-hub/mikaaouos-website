@@ -5,7 +5,7 @@
 
 We believe a key cornerstone in nurturing a successful online career is by nurturing a strong, professional, and personable online presence. 
 
-The object of this project is to deploy a platform that can realize this capability, soley for the professional usage and purposes of our client.
+The object of this project is to deploy a platform that can realize this capability, soley for the professional usage, artistic direction, and for the general personal purposes of our client.
 
 🧀🐁
 
