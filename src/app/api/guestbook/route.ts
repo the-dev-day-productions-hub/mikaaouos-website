@@ -1,4 +1,4 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
 
 const TABLE_NAME = 'guestbook'
 const MAX_CONTENT_LENGTH = 50
