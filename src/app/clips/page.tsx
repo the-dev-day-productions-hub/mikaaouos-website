@@ -57,7 +57,27 @@ export default function Home() {
               </div>
 
               {/* Just a youtube video as placeholder should be use twitch if we can */}
-              <iframe className='w-full h-full' src="https://www.youtube.com/embed/mfBoy9PyqR8?si=xChEve-p_SnsC7Wy" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+              {/* <iframe className='w-full h-full' 
+              src="https://www.youtube.com/embed/mfBoy9PyqR8?si=xChEve-p_SnsC7Wy" 
+              title="YouTube video player" 
+              allow="accelerometer; 
+              autoplay; clipboard-write; 
+              encrypted-media; 
+              gyroscope; 
+              picture-in-picture; web-share" ></iframe> */}
+
+              <iframe className='w-full h-full'
+              src={"https://clips.twitch.tv/embed?" +
+                new URLSearchParams({
+                  clip: "HeartlessSwissTubersPermaSmug-0ksTjSOesnXkruQh", // id in the clip data
+                  parent: "moderator-worth-vpn-pants.trycloudflare.com"
+                })}
+          
+              title="Twitch Clip Player"
+              height="720"
+              width="1280"
+              allowFullScreen>
+              </iframe>
              
            
             </div>
