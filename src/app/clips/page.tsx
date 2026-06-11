@@ -1,21 +1,43 @@
 "use client"
+
 import Link from 'next/link'
 import Image from 'next/image'
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { FaClapperboard, FaRegShareFromSquare} from "react-icons/fa6";
 import { FcLike } from "react-icons/fc";
 
-export default function Home() {
+const TWITCH_ENDPOINT = `${process.env.NEXT_PUBLIC_APP_URL}/api/twitch`
+const SHARE_BASE_URL = "https://www.twitch.tv/mikaaouo/clip/"
+
+export default function Clips() { 
   const [countLike, setCountLike] = useState(0)
   const [countShare, setCountShare] = useState(0)
+  const [clips, setClips] = useState([])
 
+  //tempory likes and shares
   function handleLikeClick(){
     setCountLike(countLike + 1) 
   }
+  
   function handleShareClick(){
     setCountShare(countShare + 1)
   }
-
+  
+  useEffect(() => {
+    async function fetchBackend() {
+      const response = await fetch(TWITCH_ENDPOINT)
+    
+      if (!response.ok){
+        console.log("Twitch endpoint not connected")
+        return setClips([])
+      } 
+      
+      return setClips(await response.json())
+    }
+    
+    fetchBackend()
+  }, [])
+  
   return (
     <main>
 
@@ -43,7 +65,6 @@ export default function Home() {
 
               {/* Likes and Shares */}
               <div className='absolute w-[calc(100%+20px)] h-5 bottom-[-10] flex flex-row justify-between'>
-
                 <button onClick={handleLikeClick} className='w-10 h-5 flex flex-row items-center bg-secondary/40 cursor-pointer'>
                   <FcLike className='w-5 h-5'/>
                   <p className='text-white text-xs'>{countLike}</p>
@@ -53,7 +74,6 @@ export default function Home() {
                   <p className='text-white text-xs'>{countShare}</p>
                   <FaRegShareFromSquare className='w-5 h-5'/>  
                 </div>
-
               </div>
 
               {/* Just a youtube video as placeholder should be use twitch if we can */}
@@ -67,16 +87,15 @@ export default function Home() {
               picture-in-picture; web-share" ></iframe> */}
 
               <iframe className='w-full h-full'
-              src={"https://clips.twitch.tv/embed?" +
-                new URLSearchParams({
-                  clip: "HeartlessSwissTubersPermaSmug-0ksTjSOesnXkruQh", // id in the clip data
-                  parent: "moderator-worth-vpn-pants.trycloudflare.com"
-                })}
-          
-              title="Twitch Clip Player"
-              height="720"
-              width="1280"
-              allowFullScreen>
+                src={"https://clips.twitch.tv/embed?" +
+                  new URLSearchParams({
+                    clip: clips.length > 0 ? clips[0].id : '', // id in the clip data
+                    parent: "moderator-worth-vpn-pants.trycloudflare.com" // change tp the domain you are hosting on
+                  })}
+                title="Twitch Clip Player"
+                height="720"
+                width="1280"
+                allowFullScreen>
               </iframe>
              
            

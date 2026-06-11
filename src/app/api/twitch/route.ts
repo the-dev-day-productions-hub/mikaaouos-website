@@ -37,5 +37,12 @@ export async function GET(){
         )
     }
 
-    return Response.json((await clips.json()))
+    const strippedData = (await clips.json()).data.map((clip) => {
+        return {
+            id: clip.id,
+            title: clip.title,
+        }
+    })
+    
+    return Response.json(strippedData)
 }
