@@ -9,35 +9,55 @@ import { FcLike } from "react-icons/fc";
 const TWITCH_ENDPOINT = `${process.env.NEXT_PUBLIC_APP_URL}/api/twitch`
 const SHARE_BASE_URL = "https://www.twitch.tv/mikaaouo/clip/"
 
+interface ClipMeta {
+  id: string,
+  title: string
+}
+
 export default function Clips() { 
   const [countLike, setCountLike] = useState(0)
   const [countShare, setCountShare] = useState(0)
-  const [clips, setClips] = useState([])
+  const [clips, setClips] = useState<ClipMeta[]>([])
+  const [clipIndex, setClipIndex] = useState(0)
 
   //tempory likes and shares
-  function handleLikeClick(){
+  function handleLikeClick() {
     setCountLike(countLike + 1) 
   }
   
   function handleShareClick(){
     setCountShare(countShare + 1)
   }
+
+  function handleNextClip() {
+    setClipIndex((clipIndex + 1) % clips.length)
+  }
+
+  function handlePrevClip() {
+    setClipIndex((clipIndex - 1 + clips.length) % clips.length)
+  }
   
   useEffect(() => {
     async function fetchBackend() {
+      console.log(TWITCH_ENDPOINT)
       const response = await fetch(TWITCH_ENDPOINT)
-    
+      
       if (!response.ok){
         console.log("Twitch endpoint not connected")
         return setClips([])
       } 
+
+      const json = await response.json()
+      console.log(json)
       
-      return setClips(await response.json())
+      return setClips(json)
     }
     
     fetchBackend()
   }, [])
-  
+
+  console.log(clips)
+    
   return (
     <main>
 
@@ -52,17 +72,21 @@ export default function Clips() {
       {/* frame for the entire scrren */}
       <div className="w-full h-screen flex flex-col items-center justify-center p-4">
 
-        {/* centerpiece content */}
-        <div className="relative w-full max-w-200 h-250 p-4 flex flex-col items-center justify-center gap-2 bg-accent/80 rounded-xl shadow-xl">         
+        {/* Clips Gallery/centerpiece content */}
+        <div className="relative w-full max-w-200 h-full max-h-250 p-4 flex flex-col gap-8 items-center justify-center bg-accent/80 rounded-xl shadow-xl">
 
-          {/* Clips Gallery */}
-          <div className='w-full h-110 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
+          {/* prev clip */}
+          <div className='w-full h-30 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
+            <p className='text-white font-bold text-2xl'>{clips.length > 0 ? clips[(clipIndex - 1 + clips.length) % clips.length].title : 'No clips available'}</p>
+            <button onClick={handlePrevClip} className='w-10 h-10 flex items-center justify-center bg-secondary/40 cursor-pointer'>
+              <FaClapperboard  className='w-10 h-10 text-white'/>  
+            </button>
+          </div>         
 
-            <p className='text-white font-bold text-xl'>Clips Gallery (in developement)</p>
-
-            {/* video placeholder */}
+          {/* current selected clip */}
+          <div className='w-full py-4 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
+            <p className='text-white font-bold text-xl'>{clips.length > 0 ? clips[clipIndex].title : 'No clips available'}</p>
             <div className='relative w-full max-w-160 aspect-video flex items-center justify-center bg-black'>
-
               {/* Likes and Shares */}
               <div className='absolute w-[calc(100%+20px)] h-5 bottom-[-10] flex flex-row justify-between'>
                 <button onClick={handleLikeClick} className='w-10 h-5 flex flex-row items-center bg-secondary/40 cursor-pointer'>
@@ -76,33 +100,27 @@ export default function Clips() {
                 </div>
               </div>
 
-              {/* Just a youtube video as placeholder should be use twitch if we can */}
-              {/* <iframe className='w-full h-full' 
-              src="https://www.youtube.com/embed/mfBoy9PyqR8?si=xChEve-p_SnsC7Wy" 
-              title="YouTube video player" 
-              allow="accelerometer; 
-              autoplay; clipboard-write; 
-              encrypted-media; 
-              gyroscope; 
-              picture-in-picture; web-share" ></iframe> */}
-
               <iframe className='w-full h-full'
                 src={"https://clips.twitch.tv/embed?" +
                   new URLSearchParams({
-                    clip: clips.length > 0 ? clips[0].id : '', // id in the clip data
-                    parent: "moderator-worth-vpn-pants.trycloudflare.com" // change tp the domain you are hosting on
+                    clip: clips.length > 0 ? clips[clipIndex].id : '', // id in the clip data
+                    parent: "attraction-format-attempted-unsubscribe.trycloudflare.com" // change tp the domain you are hosting on
                   })}
                 title="Twitch Clip Player"
                 height="720"
                 width="1280"
                 allowFullScreen>
               </iframe>
-             
-           
             </div>
-
-
           </div>
+
+          {/* next clip */}
+          <div className='w-full h-30 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
+            <p className='text-white font-bold text-2xl'>{clips.length > 0 ? clips[(clipIndex + 1) % clips.length].title : 'No clips available'}</p>
+            <button onClick={handleNextClip} className='w-10 h-10 flex items-center justify-center bg-secondary/40 cursor-pointer'>
+              <FaClapperboard className='w-10 h-10 text-white'/>  
+            </button>
+          </div> 
          
         </div>
 
