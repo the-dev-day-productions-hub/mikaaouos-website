@@ -12,6 +12,7 @@ const SHARE_BASE_URL = "https://www.twitch.tv/mikaaouo/clip/"
 interface ClipMeta {
   id: string,
   title: string
+  thumbnail: string
 }
 
 export default function Clips() { 
@@ -19,6 +20,10 @@ export default function Clips() {
   const [countShare, setCountShare] = useState(0)
   const [clips, setClips] = useState<ClipMeta[]>([])
   const [clipIndex, setClipIndex] = useState(0)
+
+  const prevClip = (clipIndex - 1 + clips.length) % clips.length
+  const nextClip = (clipIndex + 1) % clips.length
+
 
   //tempory likes and shares
   function handleLikeClick() {
@@ -39,7 +44,6 @@ export default function Clips() {
   
   useEffect(() => {
     async function fetchBackend() {
-      console.log(TWITCH_ENDPOINT)
       const response = await fetch(TWITCH_ENDPOINT)
       
       if (!response.ok){
@@ -55,8 +59,6 @@ export default function Clips() {
     
     fetchBackend()
   }, [])
-
-  console.log(clips)
     
   return (
     <main>
@@ -73,13 +75,19 @@ export default function Clips() {
       <div className="w-full h-screen flex flex-col items-center justify-center p-4">
 
         {/* Clips Gallery/centerpiece content */}
-        <div className="relative w-full max-w-200 h-full max-h-250 p-4 flex flex-col gap-8 items-center justify-center bg-accent/80 rounded-xl shadow-xl">
+        <div className="relative w-full max-w-200 h-full max-h-250 flex flex-col gap-4 items-center justify-center p-4 bg-accent/80 rounded-xl shadow-xl">
 
           {/* prev clip */}
-          <div className='w-full h-30 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
-            <p className='text-white font-bold text-2xl'>{clips.length > 0 ? clips[(clipIndex - 1 + clips.length) % clips.length].title : 'No clips available'}</p>
-            <button onClick={handlePrevClip} className='w-10 h-10 flex items-center justify-center bg-secondary/40 cursor-pointer'>
-              <FaClapperboard  className='w-10 h-10 text-white'/>  
+          <div className='w-full h-60 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
+            <p className='text-white font-bold text-2xl'>{clips.length > 0 ? clips[prevClip].title : 'No clips available'}</p>
+            <button onClick={handlePrevClip} className='w-1/2 flex items-center justify-center cursor-pointer'>
+              <Image
+                className=' w-full aspect-video'
+                src={clips.length > 0 ? clips[prevClip].thumbnail : '/assets/images/placeholder.png'}
+                width={480} height={272}
+                alt='Thumbnail'
+                unoptimized
+              />
             </button>
           </div>         
 
@@ -115,10 +123,16 @@ export default function Clips() {
           </div>
 
           {/* next clip */}
-          <div className='w-full h-30 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
-            <p className='text-white font-bold text-2xl'>{clips.length > 0 ? clips[(clipIndex + 1) % clips.length].title : 'No clips available'}</p>
-            <button onClick={handleNextClip} className='w-10 h-10 flex items-center justify-center bg-secondary/40 cursor-pointer'>
-              <FaClapperboard className='w-10 h-10 text-white'/>  
+          <div className='w-full h-60 bg-midbackground/60 flex flex-col items-center justify-center rounded-lg'>
+            <p className='text-white font-bold text-2xl'>{clips.length > 0 ? clips[nextClip].title : 'No clips available'}</p>
+            <button onClick={handleNextClip} className='w-1/2 flex items-center justify-center cursor-pointer'>
+              <Image
+                className=' w-full aspect-video'
+                src={clips.length > 0 ? clips[nextClip].thumbnail : '/assets/images/placeholder.png'}
+                width={480} height={272}
+                alt='Thumbnail'
+                unoptimized
+              />
             </button>
           </div> 
          

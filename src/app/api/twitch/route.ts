@@ -41,6 +41,7 @@ export async function GET(){
         return {
             id: clip.id,
             title: clip.title,
+            thumbnail: clip.thumbnail_url,
         }
     })
     
