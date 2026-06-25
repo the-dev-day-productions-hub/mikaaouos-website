@@ -36,14 +36,37 @@ export async function GET(){
             { status: 500 }
         )
     }
+    
+    const user = await fetch("https://api.twitch.tv/helix/users?"+
+        new URLSearchParams({
+            id: "557314779",
+        }), {
+        headers: {
+            "Client-ID": `${process.env.TWITCH_CLIENT_ID}`,
+            "Authorization": `Bearer ${accessToken}`
+        }
+    })
 
-    const strippedData = (await clips.json()).data.map((clip) => {
+    if (!user.ok) {
+        return Response.json(
+            { message: 'Failed to fetch user information' }, 
+            { status: 500 }
+        )
+    }
+
+    const strippedClips = (await clips.json()).data.map((clip) => {
         return {
             id: clip.id,
             title: clip.title,
             thumbnail: clip.thumbnail_url,
         }
     })
+    const userData = (await user.json()).data.map((user) => {
+        return {
+            display_name: user.display_name,
+            profile_image_url: user.profile_image_url,
+        }
+    })
     
-    return Response.json(strippedData)
+    return Response.json({ clips: strippedClips, user: userData })
 }

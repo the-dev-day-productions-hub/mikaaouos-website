@@ -51,10 +51,10 @@ export default function Clips() {
         return setClips([])
       } 
 
-      const json = await response.json()
+      const json = (await response.json())
       console.log(json)
       
-      return setClips(json)
+      return setClips(json.clips)
     }
     
     fetchBackend()
