@@ -63,8 +63,8 @@ export async function GET(){
     })
     const userData = (await user.json()).data.map((user) => {
         return {
-            display_name: user.display_name,
-            profile_image_url: user.profile_image_url,
+            username: user.display_name,
+            profilePic: user.profile_image_url,
         }
     })
     

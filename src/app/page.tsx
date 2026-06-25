@@ -1,20 +1,76 @@
+"use client"
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react';
 import { FaTiktok, FaTwitch, FaTwitter, FaDiscord, FaClapperboard } from "react-icons/fa6";
 import { TbTipJar } from "react-icons/tb";
 import { TbBubbleTea } from "react-icons/tb"
 
-
-export default async function Home() {
-  const discordResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/discord`)
-  
-  if (!discordResponse.ok) {
-    return <div>
-      Failed to fetch data from {process.env.NEXT_PUBLIC_APP_URL}/api/discord
-    </div>
+interface StreamerData {
+  twitch: {
+    username: string,
+    profilePic: string
+  },
+  discord: {
+    username : string,
+    clanTag : string,
+    clanImage : string,
+    avatarImage : string,
+    avatarDecoration : string,
+    nameTagDecoration : string
   }
+}
 
-  const discordData = await discordResponse.json() 
+export default function Home() {
+
+  const DISCORD_ENDPOINT = `${process.env.NEXT_PUBLIC_APP_URL}/api/discord`
+  const TWITCH_ENDPOINT = `${process.env.NEXT_PUBLIC_APP_URL}/api/twitch`
+
+  //how the does this still work
+  // const discordResponse = await fetch(DISCORD_ENDPOINT)
+  
+  // if (!discordResponse.ok) {
+  //   return <div>
+  //     Failed to fetch data from {process.env.NEXT_PUBLIC_APP_URL}/api/discord
+  //   </div>
+  // }
+
+  // const discordData = await discordResponse.json()
+  const [streamerData, setStreamerData] = useState<StreamerData | 0>(0)
+
+    useEffect(() => {
+      async function fetchBackend() {
+
+        const twitchResponse = await fetch(TWITCH_ENDPOINT)        
+        if (!twitchResponse.ok){
+          console.log("Twitch endpoint not connected")
+          return setStreamerData(0)
+        }
+        
+        const discordResponse = await fetch(DISCORD_ENDPOINT)
+        if (!discordResponse.ok){
+          console.log("Discord endpoint not connected")
+          return setStreamerData(0)
+        }
+  
+        const twitchData = (await twitchResponse.json()).user[0]
+        console.log(twitchData)
+        const discordData = (await discordResponse.json())
+        console.log("spacerlol")
+        console.log(discordData)
+    
+        return setStreamerData({ twitch: twitchData, discord: discordData })
+      }
+      
+      fetchBackend()
+    }, [])
+
+    // this still appears when going to the page for the first time so make it pretty loading page? 
+    if (!streamerData) {
+      return <div>
+        Failed to fetch data from from either twitch or discord endpoints. Please check the server logs for more information.
+      </div>
+    }
 
   return (
     <main>
@@ -39,13 +95,14 @@ export default async function Home() {
             <div className="w-30 h-30 rounded-full overflow-hidden bg-white">
               <Image 
                 className="w-full h-full object-cover" 
-                src="/assets/images/profilePic.png"
+                src={streamerData.twitch.profilePic}
                 width={200} height={200} 
                 alt=''
+                unoptimized
               />
             </div>
             <div className='flex flex-col gap-0.5'>
-              <p className="text-white font-bold text-4xl">Mikaaouo</p>
+              <p className="text-white font-bold text-4xl">{streamerData.twitch.username}</p>
               <div className="flex flex-row gap-2 text-2xl">
                 <Link href='https://www.twitch.tv/mikaaouo'><FaTwitch/></Link>
                 <Link href='https://discord.gg/2BdT9ZCWHe'><FaDiscord/></Link>
@@ -70,16 +127,16 @@ export default async function Home() {
             <div className='relative className="h-full rounded-full aspect-square bg-white"'>
               <Image
                 className='absolute'
-                src={discordData.avatarDecoration}
+                src={streamerData.discord.avatarDecoration}
                 width={100} height={100}
                 alt='Decoration'
                 unoptimized
               />
               <Image
                 className='rounded-full'
-                src={discordData.avatarImage}
+                src={streamerData.discord.avatarImage}
                 width={50} height={50}
-                quality={127}
+                quality={75}
                 alt="Profile Pic"
                 unoptimized
               />
@@ -89,17 +146,17 @@ export default async function Home() {
             {/* Username and Status */}
             <div className='h-full flex flex-col '>
               <div className='h-1/2 flex flex-row justify-center items-center gap-1'>
-                <p className="text-white font-bold text-xl">{discordData.username}</p>
+                <p className="text-white font-bold text-xl">{streamerData.discord.username}</p>
                 
                 {/* Clan Tag */}
                 <div className='h-full flex flex-row justify-center items-center gap-1 p-2 rounded-2xl bg-accent/30'>
                   <Image
-                    src={discordData.clanImage}
+                    src={streamerData.discord.clanImage}
                     width={10} height={10}
                     alt='DiscordImageTag'
                     unoptimized
                   />
-                  <p className="text-white text-xs font-bold">{discordData.clanTag}</p>
+                  <p className="text-white text-xs font-bold">{streamerData.discord.clanTag}</p>
                   
                 </div>
 
@@ -115,9 +172,10 @@ export default async function Home() {
             {/* Nameplate Deco */}
             <Image
               className='absolute h-full w-full'
-              src={discordData.nameTagDecoration}
+              src={streamerData.discord.nameTagDecoration}
               width={672} height={126}
               alt='Nameplate Deco'
+              loading='eager'
               unoptimized
             />
             
